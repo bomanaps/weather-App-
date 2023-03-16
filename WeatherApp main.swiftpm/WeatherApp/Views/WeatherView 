@@ -1,0 +1,22 @@
+
+import SwiftUI
+
+struct WeatherView: View {
+    @StateObject var weatherViewModel: WeatherViewModel
+    
+    var body: some View {
+        VStack {
+            Text(weatherViewModel.weather?.name ?? "")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+            Text("\(weatherViewModel.weather?.main.temp ?? 0)°F")
+                .font(.title)
+            Text(weatherViewModel.weather?.weather.first?.description.capitalized ?? "")
+                .font(.headline)
+                .padding(.top)
+        }
+        .onAppear {
+            weatherViewModel.fetchWeather()
+        }
+    }
+}
